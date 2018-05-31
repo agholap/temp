@@ -8,7 +8,7 @@
     {
         "question": "Activity Two",
         "answer": "Some answer",
-        "value": 64,
-        "consequence": 5
+        "value": 48,
+        "consequence": 1
     }
 ]
