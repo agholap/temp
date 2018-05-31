@@ -3,12 +3,12 @@
         "question": "Activity One",
         "answer": "Some answer",
         "value": 48,
-        "consequence": 3
+        "consequence": 40
     },
     {
         "question": "Activity Two",
         "answer": "Some answer",
         "value": 48,
-        "consequence": 1
+        "consequence": 38
     }
 ]
