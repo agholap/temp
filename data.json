@@ -20,7 +20,19 @@
     {
         "question": "Activity Two",
         "answer": "Some answer",
-        "value": 60,
-        "consequence": 60
+        "value": 30,
+        "consequence": 20
+    },
+    {
+        "question": "Activity One",
+        "answer": "Some answer",
+        "value": 15,
+        "consequence": 48
+    },
+    {
+        "question": "Activity Two",
+        "answer": "Some answer",
+        "value": 34,
+        "consequence": 40
     }
 ]
