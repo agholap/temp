@@ -1,7 +1,41 @@
+<html>
 <head>
+    <style>
+        body { font-family: Arial;
+            font-size: 12px;
+        }
+  
+  .axis, .axis path {
+    fill: none;
+    stroke: #ACB849;
+  }
+  .dot {
+    stroke: none;
+  }
+  
+  text {
+    stroke: none;
+    fill: gray;
+  }
+  .textLabel {
+    stroke: none;
+   font-size: 11px;
+    fill: black;
+  }
+  .tooltip {
+    position: absolute;
+    font-size: 11px;
+    width: 200px;
+    height: 28px;
+    pointer-events: none;
+  }</style>
+  <script src="https://d3js.org/d3.v4.min.js"></script>
+
+    </head>
     <body>
             <svg id="scatter" width="700" height="700">
              </svg>
     </body>
-    
-</head>
+    <script src="scripts/index.js"></script>
+
+</html>

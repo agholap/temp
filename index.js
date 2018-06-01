@@ -62,13 +62,16 @@ g.append("rect")
             .attr("text-anchor", "middle")  // this makes it easy to centre the text as the transform is applied to the anchor
             .attr("transform", "translate("+ -5 +","+((height/2)-margin.top)+")rotate(-90)")  // text is drawn off the screen top left, move down and out and rotate
             .text("OPPORTUNITY FACTORS");
-            
-d3.json("https://cdn.rawgit.com/agholap/temp/8700905f/data.json", function(error, data) {
+ var OpportunityId = parent.Xrm.Page.data.entity.getId().replace("{", "").replace("}", "");           
+ //var OpportunityId = "BE0E0283-5BF2-E311-945F-6C3BE5A8DD64";
+//d3.json("https://cdn.rawgit.com/agholap/temp/8700905f/data.json", function(error, data) {
+  var oDataUrl = parent.Xrm.Page.context.getClientUrl() + "/api/data/v8.2/neu_opportunityprofiles?$select=neu_date,neu_opportunityfactors,neu_riskfactors,neu_userbuyerscoverage&$filter=_neu_opportunityid_value eq " + OpportunityId
+ //var oDataUrl = "https://neuprojectdemo.crm.dynamics.com/api/data/v8.2/neu_opportunityprofiles?$select=neu_date,neu_opportunityfactors,neu_riskfactors,neu_userbuyerscoverage&$filter=_neu_opportunityid_value eq " + OpportunityId
+  d3.json(oDataUrl, function(error, data) {
   if (error) throw error;
-
- data.forEach(function(d) {
- console.log(d.consequence);
- console.log(d.value);
+ data.value.forEach(function(d) {
+ console.log(d.neu_opportunityfactors);
+ console.log(d.neu_riskfactors);
     //d.consequence = +d.consequence;
    //d.value = +d.value;
  });
@@ -76,19 +79,19 @@ d3.json("https://cdn.rawgit.com/agholap/temp/8700905f/data.json", function(error
 
 //append circle
 var gdots = g.selectAll("g.dot")
-      .data(data)
+      .data(data.value)
      .enter().append("g");
      
      gdots.append("circle")
       .attr("class", "dot")
       .attr("r",10)
-      .attr("cx", function(d) { return x(d.consequence); })
-      .attr("cy", function(d) { return y(d.value); })
+      .attr("cx", function(d) { return x(d.neu_opportunityfactors); })
+      .attr("cy", function(d) { return y(d.neu_riskfactors); })
        .on("mouseover", function(d) {	
             div.transition()		
                 .duration(200)		
                 .style("opacity", .9);
-             div.html(d.value + "</br>" + d.consequence)	
+             div.html(d.neu_opportunityfactors + "," + d.neu_opportunityfactors)	
                 .style("left", (d3.event.pageX) + "px")		
                 .style("top", (d3.event.pageY - 28) + "px");	
        })
@@ -106,9 +109,9 @@ var gdots = g.selectAll("g.dot")
       });
    	 gdots.append("text")
        .attr("class", "textLabel")
-      .text(function(d){	return d.value; })
-       .attr("x", function (d) { return x(d.consequence); })
-       .attr("y", function (d) { return y(d.value)+25;});
+      .text(function(d){	return d.neu_date.substring(0,d.neu_date.indexOf("T"));})
+       .attr("x", function (d) { return x(d.neu_opportunityfactors); })
+       .attr("y", function (d) { return y(d.neu_riskfactors)+13;});
             
 
       

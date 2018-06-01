@@ -1,0 +1,25 @@
+body { font-family: Arial;}
+  
+.axis, .axis path {
+  fill: none;
+  stroke: #ACB849;
+}
+.dot {
+  stroke: none;
+}
+
+text {
+  stroke: none;
+  fill: gray;
+}
+.textLabel {
+  stroke: none;
+ font-size: 11px;
+  fill: black;
+}
+.tooltip {
+  position: absolute;
+  width: 200px;
+  height: 28px;
+  pointer-events: none;
+}
