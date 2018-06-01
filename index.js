@@ -69,14 +69,6 @@ g.append("rect")
  //var oDataUrl = "https://neuprojectdemo.crm.dynamics.com/api/data/v8.2/neu_opportunityprofiles?$select=neu_date,neu_opportunityfactors,neu_riskfactors,neu_userbuyerscoverage&$filter=_neu_opportunityid_value eq " + OpportunityId
   d3.json(oDataUrl, function(error, data) {
   if (error) throw error;
- data.value.forEach(function(d) {
- console.log(d.neu_opportunityfactors);
- console.log(d.neu_riskfactors);
-    //d.consequence = +d.consequence;
-   //d.value = +d.value;
- });
-
-
 //append circle
 var gdots = g.selectAll("g.dot")
       .data(data.value)
@@ -84,14 +76,14 @@ var gdots = g.selectAll("g.dot")
      
      gdots.append("circle")
       .attr("class", "dot")
-      .attr("r",10)
-      .attr("cx", function(d) { return x(d.neu_opportunityfactors); })
-      .attr("cy", function(d) { return y(d.neu_riskfactors); })
+      .attr("r",7)
+      .attr("cx", function(d) { return x(d.neu_riskfactors); })
+      .attr("cy", function(d) { return y(d.neu_opportunityfactors); })
        .on("mouseover", function(d) {	
             div.transition()		
                 .duration(200)		
                 .style("opacity", .9);
-             div.html(d.neu_opportunityfactors + "," + d.neu_opportunityfactors)	
+             div.html( d.neu_riskfactors + "," +d.neu_opportunityfactors)	
                 .style("left", (d3.event.pageX) + "px")		
                 .style("top", (d3.event.pageY - 28) + "px");	
        })
@@ -110,8 +102,8 @@ var gdots = g.selectAll("g.dot")
    	 gdots.append("text")
        .attr("class", "textLabel")
       .text(function(d){	return d.neu_date.substring(0,d.neu_date.indexOf("T"));})
-       .attr("x", function (d) { return x(d.neu_opportunityfactors); })
-       .attr("y", function (d) { return y(d.neu_riskfactors)+13;});
+       .attr("x", function (d) { return x(d.neu_riskfactors); })
+       .attr("y", function (d) { return y(d.neu_opportunityfactors)+13;});
             
 
       
