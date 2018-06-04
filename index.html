@@ -22,6 +22,13 @@
    font-size: 11px;
     fill: black;
   }
+  .right {
+    background-color:none;
+    border: 0px solid #73AD21;
+    width:96%;
+    margin-bottom:-20px;
+    text-align:right;
+}
   .tooltip {
     position: absolute;
     font-size: 11px;
@@ -30,11 +37,13 @@
     pointer-events: none;
   }</style>
   <script src="https://d3js.org/d3.v4.min.js"></script>
-
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
     </head>
     <body>
-            <svg id="scatter" width="700" height="700">
-             </svg>
+        <div id="icons" class="right">
+        </div>
+        <svg id="scatter" style="float:right" width="500" height="500">    
+            </svg>
     </body>
     <script src="scripts/index.js"></script>
 
