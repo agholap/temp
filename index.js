@@ -55,7 +55,7 @@ g.append("text")
   .text("QUALIFY OUT?");
 
 g.append("text")
-  .attr("x", width - 4 * (margin.right + margin.left))
+  .attr("x", width - 3 * (margin.right + margin.left))
   .attr("y", height - 1.5 * (margin.bottom + margin.top))
   .text("NEEDS WORK");
 
@@ -78,7 +78,7 @@ g.append("text")
 var OpportunityId = parent.Xrm.Page.data.entity.getId().replace("{", "").replace("}", "");
 //var OpportunityId = "BE0E0283-5BF2-E311-945F-6C3BE5A8DD64";
 //d3.json("https://cdn.rawgit.com/agholap/temp/8700905f/data.json", function(error, data) {
-var oDataUrl = parent.Xrm.Page.context.getClientUrl() + "/api/data/v8.2/neu_opportunityprofiles?$select=neu_date,neu_opportunityfactors,neu_riskfactors,neu_userbuyerscoverage&$filter=_neu_opportunityid_value eq " + OpportunityId
+var oDataUrl = parent.Xrm.Page.context.getClientUrl() + "/api/data/v8.2/neu_opportunityprofiles?$select=neu_date,neu_opportunityfactors,neu_riskfactors,neu_userbuyerscoverage&$filter=statuscode eq 1 and _neu_opportunityid_value eq " + OpportunityId
 //var oDataUrl = "https://neuprojectdemo.crm.dynamics.com/api/data/v8.2/neu_opportunityprofiles?$select=neu_date,neu_opportunityfactors,neu_riskfactors,neu_userbuyerscoverage&$filter=_neu_opportunityid_value eq " + OpportunityId
 d3.json(oDataUrl, function (error, data) {
   if (error) throw error;
@@ -96,11 +96,12 @@ d3.json(oDataUrl, function (error, data) {
       div.transition()
         .duration(200)
         .style("opacity", .9);
-      div.html(d.neu_riskfactors + "," + d.neu_opportunityfactors)
+      div.html( d.neu_date.substring(0, d.neu_date.indexOf("T")))
         .style("left", (d3.event.pageX) + "px")
+        .style("background-color", "#FFFFE0")
         .style("top", (d3.event.pageY - 28) + "px");
     })
-    .on("mouseout", function (d) {
+    .on("mouseout", function (d) { 
       div.transition()
         .duration(500)
         .style("opacity", 0);
@@ -150,14 +151,14 @@ function openQuickCreateForm() {
     entityType: "opportunity",
     id: OpportunityId
   };
-  page.Xrm.Utility.openQuickCreate("neu_opportunityprofile", parentAccount, param)
+  parent.Xrm.Utility.openQuickCreate("neu_opportunityprofile", parentAccount, param)
     .then(function (lookup) { successCallback(lookup); }, function (error) { errorCallback(error); });
 }
 
 // *** Function called on success.
 function successCallback(lookup) {
-  alert("lookup: " + lookup.savedEntityReference.id);
-  alert("lookup: " + lookup.savedEntityReference.name);
+//reloading chart  
+  location.reload();
 }
 
 // **** Function called on error.

@@ -19,6 +19,17 @@ text {
 }
 .tooltip {
   position: absolute;
+  width: 100px;
+  height: 16px;
+  font-size: 11px;
+  pointer-events: none;
+  text-align: center;
+  vertical-align: middle;
+}
+
+.tooltip {
+  position: absolute;
+  font-size: 11px;
   width: 200px;
   height: 28px;
   pointer-events: none;
